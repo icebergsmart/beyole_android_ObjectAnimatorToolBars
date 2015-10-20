@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -38,17 +39,20 @@ public class MainActivity extends Activity {
 			break;
 
 		default:
+			Toast.makeText(MainActivity.this, "您点击了:" + view.getId(), Toast.LENGTH_LONG).show();
 			break;
 		}
 	}
 
 	private void closeAnim() {
 		for (int i = 1; i < res.length; i++) {
-			float angle = (90 * 1.0f / (res.length - 1)) * (i-1);
-			PropertyValuesHolder holder1 = PropertyValuesHolder.ofFloat("translationX",  (float) (Math.sin((angle / 90) * 1.57) * 200),0);
-			PropertyValuesHolder holder2 = PropertyValuesHolder.ofFloat("translationY", (float) (Math.cos((angle / 90) * 1.57) * 200),0);
+			float angle = (90 * 1.0f / (res.length - 2)) * (i - 1);
+			PropertyValuesHolder holder1 = PropertyValuesHolder.ofFloat("translationX", (float) (Math.sin((angle * 1.57 / 90)) * 200), 0);
+			PropertyValuesHolder holder2 = PropertyValuesHolder.ofFloat("translationY", (float) (Math.cos((angle * 1.57 / 90)) * 200), 0);
 			ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(imageViewList.get(i), holder1, holder2);
-			//ObjectAnimator animator = ObjectAnimator.ofFloat(imageViewList.get(i), "translationY", i * 60, 0);
+			// ObjectAnimator animator =
+			// ObjectAnimator.ofFloat(imageViewList.get(i), "translationY", i * 60,
+			// 0);
 			animator.setDuration(300);
 			animator.start();
 			isNotExpand = true;
@@ -58,9 +62,9 @@ public class MainActivity extends Activity {
 
 	private void startAnim() {
 		for (int i = 1; i < res.length; i++) {
-			float angle = (90 * 1.0f / (res.length - 1)) * (i-1);
-			PropertyValuesHolder holder1 = PropertyValuesHolder.ofFloat("translationX", 0, (float) (Math.sin((angle / 90) * 1.57) * 200));
-			PropertyValuesHolder holder2 = PropertyValuesHolder.ofFloat("translationY", 0, (float) (Math.cos((angle / 90) * 1.57) * 200));
+			float angle = (90 * 1.0f / (res.length - 2)) * (i - 1);
+			PropertyValuesHolder holder1 = PropertyValuesHolder.ofFloat("translationX", 0, (float) (Math.sin((angle * 1.57 / 90)) * 200));
+			PropertyValuesHolder holder2 = PropertyValuesHolder.ofFloat("translationY", 0, (float) (Math.cos((angle * 1.57 / 90)) * 200));
 			ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(imageViewList.get(i), holder1, holder2);
 			// ObjectAnimator animator =
 			// ObjectAnimator.ofFloat(imageViewList.get(i), "translationY", 0, i *
